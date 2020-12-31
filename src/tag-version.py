@@ -11,7 +11,7 @@ def git(*args):
 
 
 def tag_repo(tag):
-    url = os.environ["url"]
+    url = 'https://github.com/' + os.environ["GITHUB_REPOSITORY"]
 
     # Transforms the repository URL to the SSH URL
     # Example input: https://gitlab-ci-token:xxxxxxxxxxxxxxxxxxxx@gitlab.com/threedotslabs/ci-examples.git
