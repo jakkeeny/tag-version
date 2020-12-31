@@ -1,4 +1,4 @@
-# Tag-Version v1
+# Tag-Version
 Provides automated versioning of your commits using git tags each time your CI/CD workflow runs.
 ## Features
 * Generate a new revision based on the last version released and the branch currently checked out
@@ -8,8 +8,8 @@ Provides automated versioning of your commits using git tags each time your CI/C
 \<major\>.\<minor\>.\<build\>\[.\<prerelease-tag\>\]
 ### Examples
 * 3.2.15
-* 1.0.3.TEST
-* 2.1.5.DEVELOP
+* 1.0.3-test
+* 2.1.5-dev
 # Usage
 See [action.yml](https://github.com/juliansangillo/tag-version/blob/master/action.yml)
 ## Pushing new build
@@ -37,13 +37,13 @@ git commit -m "Add fancy new UI #major"
 ### Example
 1.5.10 -> 2.0.0
 ## Prerelease
-The prerelease tag is a string of capitalized ASCII characters marking the version as a non-production branch (example: 1.0.0.DEVELOP). Running this action on your dev or test branches will append the name of the branch in all caps to the end of the version to identify those releases as unstable. Your stable, production versions won't have a prerelease appended at the end.
+The prerelease tag is a string of capitalized ASCII characters marking the version as a non-production branch (example: 1.0.0-dev). Running this action on your dev or test branches will append the name of the branch in all caps to the end of the version to identify those releases as unstable. Your stable, production versions won't have a prerelease appended at the end.
 ### What about pull requests?
 When you merge a pull request (or push into test or production branches), the version is not incremented as you are not introducing a new instance of your project. Instead, you are promoting an already existing version to a higher branch. The only thing that changes in this case is the prerelease tag.
-### local -> develop
-2.1.1.DEVELOP
-### develop -> test
-2.1.1.TEST
+### local -> dev
+2.1.1-dev
+### dev -> test
+2.1.1-test
 ### test -> master
 2.1.1
 ## Maintaining a CHANGELOG
@@ -69,7 +69,7 @@ The checkout action must be set to fetch the whole git history in order for a pr
 ## Inputs
 * **production-branch**: The branch to use for stable releases in production. Default is master
 * **test-branch**: The branch to use for test deployments. Default is test
-* **dev-branch**: The branch to use for dev deployments. Default is develop
+* **dev-branch**: The branch to use for dev deployments. Default is dev
 ## Ouputs
 * **revision**: The new version that was created and tagged in the format of \<major\>.\<minor\>.\<build\>\[.\<pre-release-tag\>\]
 * **is-prerelease**: Is true if this is a release into a non-production environment and indicates the build may be unstable. Returns false otherwise.
@@ -86,9 +86,9 @@ The checkout action must be set to fetch the whole git history in order for a pr
       
 - name: Version  
   id: version  
-  uses: juliansangillo/tag-version@v1  
+  uses: jakkeeny/tag-version@master  
   with:  
       production-branch: master  
       test-branch: test  
-      dev-branch: develop  
+      dev-branch: dev  
 ```

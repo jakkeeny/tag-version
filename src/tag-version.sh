@@ -100,7 +100,7 @@ getNewRevision() {
 			;;
 		esac
 
-	echo "$(join . $major_revision $minor_revision $build_number $prerelease_tag)"
+	echo "${major_revision}.${minor_revision}.${build_number}-${prerelease_tag})"
 }
 
 pullRevisionIntoTest() {

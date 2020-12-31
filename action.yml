@@ -2,7 +2,7 @@ name: 'tag-version'
 description: 'Provides automated versioning of your commits using git tags each time your CI/CD workflow runs.'
 branding:
   icon: 'tag'
-  color: 'purple'
+  color: 'green'
 inputs:
   production-branch:
     description: 'The branch to use for stable releases in production. Default is master'
@@ -15,7 +15,7 @@ inputs:
   dev-branch:
     description: 'The branch to use for dev deployments. Default is develop'
     required: false
-    default: develop
+    default: dev
 outputs:
   revision:
     description: 'The new version that was created and tagged in the format of <major>.<minor>.<build>[.<pre-release-tag>]'
