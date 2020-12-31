@@ -13,12 +13,7 @@ outputs:
 runs:
   using: composite
   steps:
-    - name: Python 3
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8
-  
-    - name: tag-version
+    - id: tag-version
       run: |
         pip install semver
         python $GITHUB_ACTION_PATH/src/tag-version.py > version
