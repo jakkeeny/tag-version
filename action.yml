@@ -3,17 +3,23 @@ description: 'Provides automated versioning of your commits using git tags each 
 branding:
   icon: 'tag'
   color: 'green'
+inputs:
+  url:
+    description: ''
+    required: true
+  major:
+    description: ''
+    required: true
+  minor:
+    description: ''
+    required: true
 outputs:
   revision:
     description: 'The new version that was created and tagged in the format of <major>.<minor>.<build>[.<pre-release-tag>]'
     value: ${{ steps.tag-version.outputs.revision }}
-  is-prerelease:
-    description: 'Is true if this is a release into a non-production environment and indicates the build may be unstable. Returns false otherwise.'
-    value: ${{ steps.tag-version.outputs.is-prerelease }}
 runs:
   using: composite
   steps:
     - id: tag-version
-      run: |
-        pip install semver
-        python $GITHUB_ACTION_PATH/src/tag-version.py > version
+      run: bash $GITHUB_ACTION_PATH/src/tag-version.sh ${{ inputs.url }} ${{ inputs.major }} ${{ inputs.minor }}
+      shell: bash
