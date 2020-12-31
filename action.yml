@@ -3,16 +3,6 @@ description: 'Provides automated versioning of your commits using git tags each 
 branding:
   icon: 'tag'
   color: 'green'
-inputs:
-  url:
-    description: ''
-    required: true
-  major:
-    description: ''
-    required: true
-  minor:
-    description: ''
-    required: true
 outputs:
   revision:
     description: 'The new version that was created and tagged in the format of <major>.<minor>.<build>[.<pre-release-tag>]'
@@ -21,5 +11,5 @@ runs:
   using: composite
   steps:
     - id: tag-version
-      run: bash $GITHUB_ACTION_PATH/src/tag-version.sh ${{ inputs.url }} ${{ inputs.major }} ${{ inputs.minor }}
+      run: bash $GITHUB_ACTION_PATH/src/tag-version.sh
       shell: bash
