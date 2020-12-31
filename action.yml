@@ -12,8 +12,12 @@ outputs:
     value: ${{ steps.tag-version.outputs.is-prerelease }}
 runs:
   using: composite
-  steps:     
+  steps:
+    uses: actions/setup-python@v2
+    with:
+      python-version: 3.8
+  
     - id: tag-version
       run: |
         pip install semver
-        $GITHUB_ACTION_PATH/src/tag-version > version
+        python $GITHUB_ACTION_PATH/src/tag-version.py > version
