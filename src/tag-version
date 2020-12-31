@@ -11,7 +11,7 @@ def git(*args):
 
 
 def tag_repo(tag):
-    url = os.environ["CI_REPOSITORY_URL"]
+    url = os.environ["url"]
 
     # Transforms the repository URL to the SSH URL
     # Example input: https://gitlab-ci-token:xxxxxxxxxxxxxxxxxxxx@gitlab.com/threedotslabs/ci-examples.git
@@ -25,8 +25,8 @@ def tag_repo(tag):
 
 def bump(latest):
 	ver = semver.VersionInfo.parse(latest)
-	major = int(os.environ["MAJOR_VER"])
-	minor = int(os.environ["MINOR_VER"])
+	major = int(os.environ["major"])
+	minor = int(os.environ["minor"])
 	
 	if (ver.major != major):
 		return semver.bump_major(latest)
