@@ -5,7 +5,7 @@ Provides automated versioning of your commits using git tags each time your CI/C
 * Create a new tag for this revision
 * Maintain a CHANGELOG of the commits between each version
 ## Version Format
-\<major\>.\<minor\>.\<build\>\[.\<prerelease-tag\>\]
+\<major\>.\<minor\>.\<build\>\[-\<prerelease-tag\>\]
 ### Examples
 * 3.2.15
 * 1.0.3-test
@@ -88,7 +88,5 @@ The checkout action must be set to fetch the whole git history in order for a pr
   id: version  
   uses: jakkeeny/tag-version@master  
   with:  
-      production-branch: master  
-      test-branch: test  
-      dev-branch: dev  
+      branch-name: ${GITHUB_REF##*/}
 ```

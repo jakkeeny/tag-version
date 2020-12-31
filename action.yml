@@ -3,19 +3,6 @@ description: 'Provides automated versioning of your commits using git tags each 
 branding:
   icon: 'tag'
   color: 'green'
-inputs:
-  production-branch:
-    description: 'The branch to use for stable releases in production. Default is master'
-    required: false
-    default: master
-  test-branch:
-    description: 'The branch to use for test deployments. Default is test'
-    required: false
-    default: test
-  dev-branch:
-    description: 'The branch to use for dev deployments. Default is develop'
-    required: false
-    default: dev
 outputs:
   revision:
     description: 'The new version that was created and tagged in the format of <major>.<minor>.<build>[.<pre-release-tag>]'
@@ -25,7 +12,8 @@ outputs:
     value: ${{ steps.tag-version.outputs.is-prerelease }}
 runs:
   using: composite
-  steps:
+  steps:     
     - id: tag-version
-      run: bash $GITHUB_ACTION_PATH/src/tag-version.sh ${{ inputs.production-branch }} ${{ inputs.test-branch }} ${{ inputs.dev-branch }}
-      shell: bash
+      run: |
+        pip install semver
+        $GITHUB_ACTION_PATH/src/tag-version > version
